@@ -20,6 +20,7 @@ public class ResourceManager : MonoBehaviour
         }
 
         resources.Add("Money", 0);
+        resources.Add("Followers", 0);
     }
 
     public void AddResource(string type, float amount)

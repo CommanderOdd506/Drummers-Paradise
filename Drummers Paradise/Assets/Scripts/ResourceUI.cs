@@ -3,11 +3,12 @@ using TMPro;
 
 public class ResourceUI : MonoBehaviour
 {
-    public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI resourceText;
+    public string resourceType = "Money";
 
     void Update()
     {
-        moneyText.text = "Money: " + ResourceManager.Instance.GetResource("Money").ToString("F0");
+        resourceText.text = resourceType + ": " + ResourceManager.Instance.GetResource(resourceType).ToString("F0");
     }
 
 

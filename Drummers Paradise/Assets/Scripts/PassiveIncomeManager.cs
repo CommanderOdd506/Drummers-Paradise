@@ -16,7 +16,15 @@ public class PassiveIncomeManager : MonoBehaviour
     {
         while (true)
         {
-            ResourceManager.Instance.AddResource("Money", drummerIncome * drummerCount);
+            float income = drummerIncome * drummerCount;
+
+            ResourceManager.Instance.AddResource("Money", income);
+
+            int followerGain = Mathf.RoundToInt(income * 0.5f);
+            ResourceManager.Instance.AddResource("Followers", followerGain);
+
+            Debug.Log("Followers gained: " + followerGain);
+
             yield return new WaitForSeconds(1f);
         }
     }
