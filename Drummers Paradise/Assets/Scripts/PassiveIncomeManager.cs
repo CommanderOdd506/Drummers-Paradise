@@ -4,7 +4,7 @@ using UnityEngine;
 public class PassiveIncomeManager : MonoBehaviour
 {
     public float drummerIncome = 1f;
-    public int drummerCount = 1;
+    public float followerIncrease;
 
     void Start()
     {
@@ -16,14 +16,13 @@ public class PassiveIncomeManager : MonoBehaviour
     {
         while (true)
         {
-            float income = drummerIncome * drummerCount;
+            float income = drummerIncome;
 
-            ResourceManager.Instance.AddResource("Money", income);
+            ResourceManager.Instance.AddResource(ResourceType.Money, income);
 
-            int followerGain = Mathf.RoundToInt(income * 0.5f);
-            ResourceManager.Instance.AddResource("Followers", followerGain);
+            ResourceManager.Instance.AddResource(ResourceType.Followers, followerIncrease);
 
-            Debug.Log("Followers gained: " + followerGain);
+            Debug.Log("Followers gained: " + followerIncrease);
 
             yield return new WaitForSeconds(1f);
         }

@@ -8,6 +8,6 @@ public class ClickAction : MonoBehaviour
 
     public void OnClickDrum()
     {
-        ResourceManager.Instance.AddResource("Money", clickValue);
+        ResourceManager.Instance.AddResource(ResourceType.Money, clickValue);
     }
 }
