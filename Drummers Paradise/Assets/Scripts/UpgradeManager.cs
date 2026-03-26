@@ -26,19 +26,32 @@ public class UpgradeManager : MonoBehaviour
         Upgrade upgrade = upgrades[index];
         return upgrade;
     }
-    public void BuyUpgrade(int index)
+    public bool BuyUpgrade(int index, out string errorMessage)      //out parameter used to return purchase success + error message
     {
-        Upgrade upgrade = upgrades[index];
+        errorMessage = "";
 
+        Upgrade upgrade = upgrades[index];
         float money = ResourceManager.Instance.GetResource(ResourceType.Money);
 
-        if (money >= upgrade.cost)
+        if(upgrade.currentState == UpgradeState.Purchased)
         {
-            ResourceManager.Instance.AddResource(ResourceType.Money, -upgrade.cost);
-
-            ApplyUpgrade(upgrade);
+            errorMessage = "Already Purchased";
+            return false;
         }
-
+        if(upgrade.currentState == UpgradeState.Locked)
+        {
+            errorMessage = "Upgrade is Locked";
+            return false;
+        }
+        if (money < upgrade.cost)
+        {
+            errorMessage = "Not Enough Money";
+            return false;
+        }
+        ResourceManager.Instance.AddResource(ResourceType.Money, -upgrade.cost);
+        upgrade.currentState = UpgradeState.Purchased;
+        ApplyUpgrade(upgrade);
+        return true;
     }
     private void Update()
     {

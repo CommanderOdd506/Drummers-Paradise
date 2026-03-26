@@ -25,17 +25,27 @@ public class ResourceManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        resources.Add("Money", 0);
-        resources.Add("Followers", 0);
+        resources.Add("Money", 0f);
+        resources.Add("Followers", 0f);
     }
 
-    public void AddResource(ResourceType resourceType, float amount)
+    void ModifyResource(ref float resourceValue, float amount)
+    {
+        resourceValue += amount;
+    }
+    public void AddResource(ResourceType resourceType, float amount)      //ref parameter used to modify resource totals in-place inside a helper method
     {
         string type = resourceType.ToString();
 
         if (resources.ContainsKey(type))
         {
-            resources[type] += amount;
+            float value = resources[type];
+            ModifyResource(ref value, amount);
+            resources[type] = value;
+        }
+        else
+        {
+            Debug.LogWarning("Resource Type Not found" + type);
         }
     }
 

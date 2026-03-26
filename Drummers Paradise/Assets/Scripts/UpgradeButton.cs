@@ -7,6 +7,9 @@ public class UpgradeButton : MonoBehaviour
     private Upgrade upgrade;
     private Button button;
 
+    public Text errorText;
+    
+    
     private void Start()
     {
         upgrade = UpgradeManager.Instance.GetUpgrade(upgradeIndex);
@@ -30,8 +33,25 @@ public class UpgradeButton : MonoBehaviour
 
         }
     }
-    public void Purchase()
+
+    public void Purchase()              
     {
-        UpgradeManager.Instance.BuyUpgrade(upgradeIndex);
+        if (!UpgradeManager.Instance.BuyUpgrade(upgradeIndex, out string error))        //out parameter used to return purchase success + error message
+        {
+            Debug.Log("Purchase Failed: " + error);
+            if (errorText != null)
+            {
+                errorText.text = error;
+            }
+        }
+        else
+        {
+            Debug.Log("Purchase Successful!");
+
+            if(errorText != null)
+            {
+                errorText.text = "";
+            }
+        }
     }
 }

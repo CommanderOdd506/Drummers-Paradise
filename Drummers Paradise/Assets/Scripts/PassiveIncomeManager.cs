@@ -22,7 +22,7 @@ public class PassiveIncomeManager : MonoBehaviour
 
             ResourceManager.Instance.AddResource(ResourceType.Followers, followerIncrease);
 
-            Debug.Log("Followers gained: " + followerIncrease);
+            //Debug.Log("Followers gained: " + followerIncrease);
 
             yield return new WaitForSeconds(1f);
         }
