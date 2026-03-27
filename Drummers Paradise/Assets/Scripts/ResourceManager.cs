@@ -12,6 +12,8 @@ public class ResourceManager : MonoBehaviour
 {
     public static ResourceManager Instance;
 
+    public static System.Action OnResourceChanged;
+
     public Dictionary<string, float> resources = new Dictionary<string, float>();
 
     void Awake()
@@ -23,6 +25,7 @@ public class ResourceManager : MonoBehaviour
         else
         {
             Destroy(this.gameObject);
+            return;
         }
 
         resources.Add("Money", 0f);
@@ -33,7 +36,8 @@ public class ResourceManager : MonoBehaviour
     {
         resourceValue += amount;
     }
-    public void AddResource(ResourceType resourceType, float amount)      //ref parameter used to modify resource totals in-place inside a helper method
+
+    public void AddResource(ResourceType resourceType, float amount)
     {
         string type = resourceType.ToString();
 
@@ -42,10 +46,13 @@ public class ResourceManager : MonoBehaviour
             float value = resources[type];
             ModifyResource(ref value, amount);
             resources[type] = value;
+
+           
+            OnResourceChanged?.Invoke();
         }
         else
         {
-            Debug.LogWarning("Resource Type Not found" + type);
+            Debug.LogWarning("Resource Type Not found " + type);
         }
     }
 
