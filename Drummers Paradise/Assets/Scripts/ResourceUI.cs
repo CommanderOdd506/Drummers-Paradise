@@ -20,7 +20,7 @@ public class ResourceUI : MonoBehaviour
     }
     void UpdateText()
     {
-        resourceText.text = resourceType + ": ";
-            ResourceManager.Instance.GetResource(resourceType).ToString("F0");
+        resourceText.text = resourceType + ": "+ ResourceManager.Instance.GetResource(resourceType).ToString("F0");
+            
     }
 }   
