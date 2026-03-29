@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerGenerator : Generator
+public class DrumTechGenerator : Generator
 {
     public override void Produce()
     {
