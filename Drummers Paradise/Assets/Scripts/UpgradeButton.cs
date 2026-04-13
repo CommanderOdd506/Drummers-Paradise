@@ -5,44 +5,109 @@ public class UpgradeButton : MonoBehaviour
 {
     public int upgradeIndex;
     private Upgrade upgrade;
+    private Generator generator;
     private Button button;
+    public bool isGeneratorButton;
 
     public Text errorText;
     
     
     private void Start()
     {
-        upgrade = UpgradeManager.Instance.GetUpgrade(upgradeIndex);
+        if (isGeneratorButton)
+        {
+            generator = GeneratorBuyer.Instance.GetGenerator(upgradeIndex);
+        }
+        else
+        {
+            upgrade = UpgradeManager.Instance.GetUpgrade(upgradeIndex);
+        }
+            
         button = GetComponent<Button>();
     }
 
+    
     private void Update()
     {
-        switch (upgrade.currentState)
+        if (isGeneratorButton)
         {
-            case UpgradeState.Locked:
-                button.interactable = false;
-                break;
-            case UpgradeState.Available:
-                button.interactable = true;
-                break;
-            case UpgradeState.Purchased:
-                button.interactable = false;
-                break;
+            switch (generator.currentState)
+            {
+                case UpgradeState.Locked:
+                    button.interactable = false;
+                    break;
+                case UpgradeState.Available:
+                    button.interactable = true;
+                    break;
+                case UpgradeState.Purchased:
+                    button.interactable = false;
+                    break;
 
 
+            }
         }
-    }//out parameter used to return purchase success + error message
+        else
+        {
+            switch (upgrade.currentState)
+            {
+                case UpgradeState.Locked:
+                    button.interactable = false;
+                    break;
+                case UpgradeState.Available:
+                    button.interactable = true;
+                    break;
+                case UpgradeState.Purchased:
+                    button.interactable = false;
+                    break;
 
-    public void Purchase()
+
+            }
+        }
+        
+    }
+
+    public void Purchase()              
     {
-        if (!upgrade.CanPurchase(out string error))
+        if (isGeneratorButton)
         {
-            //errorText.text = error;
-            return;
-        }
+            if (!GeneratorBuyer.Instance.BuyGenerator(upgradeIndex, out string error))        //out parameter used to return purchase success + error message
+            {
+                Debug.Log("Purchase Failed: " + error);
+                if (errorText != null)
+                {
+                    errorText.text = error;
+                }
+            }
+            else
+            {
+                Debug.Log("Purchase Successful!");
 
-        upgrade.OnPurchase();
-        //errorText.text = "";
+                if (errorText != null)
+                {
+                    errorText.text = "";
+                }
+            }
+        }
+        else
+        {
+            if (!UpgradeManager.Instance.BuyUpgrade(upgradeIndex, out string error))        //out parameter used to return purchase success + error message
+            {
+                Debug.Log("Purchase Failed: " + error);
+                if (errorText != null)
+                {
+                    errorText.text = error;
+                }
+            }
+            else
+            {
+                Debug.Log("Purchase Successful!");
+
+                if (errorText != null)
+                {
+                    errorText.text = "";
+                }
+            }
+        }
+        
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build;
 using UnityEngine;
+using TMPro;
 
 public enum UpgradeState
 {
@@ -49,7 +50,7 @@ public class UpgradeManager : MonoBehaviour
             return false;
         }
         ResourceManager.Instance.AddResource(ResourceType.Money, -upgrade.cost);
-        upgrade.currentState = UpgradeState.Purchased;
+        //upgrade.currentState = UpgradeState.Purchased;
         ApplyUpgrade(upgrade);
         return true;
     }
@@ -60,7 +61,7 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < upgrades.Count; i++)
         {
             if (upgrades[i].currentState == UpgradeState.Purchased)
-                continue;
+                return;
 
 
             Upgrade upgrade = upgrades[i];
@@ -76,10 +77,11 @@ public class UpgradeManager : MonoBehaviour
 
         }
     }
-    public void ApplyUpgrade(Upgrade upgrade)
+    void ApplyUpgrade(Upgrade upgrade)
     {
         PassiveIncomeManager income = FindObjectOfType<PassiveIncomeManager>();
-
+        upgrade.cost *= upgrade.costIncrease;
+        upgrade.text.text = upgrade.cost.ToString();
         if(upgrade.upgradeMultiplier.multiplier > 0)
         {
             if (upgrade.upgradeMultiplier.type == ResourceType.Money)
@@ -96,7 +98,6 @@ public class UpgradeManager : MonoBehaviour
     }
 }
 
-/*
 [System.Serializable]
 public class Upgrade
 {
@@ -106,8 +107,9 @@ public class Upgrade
     public float costIncrease;
     public int tier;
     public UpgradeState currentState;
+    public TextMeshProUGUI text;
 }
-*/
+
 [System.Serializable]
 public struct UpgradeMultiplier
 {
