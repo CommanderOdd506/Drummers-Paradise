@@ -1,35 +1,46 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PassiveIncomeManager : MonoBehaviour
 {
+    public static PassiveIncomeManager Instance;
+
     public float drummerIncome = 1f;
     public float followerIncrease;
-    private Generator[] generators;
+
+    private List<Generator> generators = new List<Generator>();
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
         StartCoroutine(StartDelay());
-        generators = FindObjectsOfType<Generator>();
-    }
 
+        // initial population (optional)
+        generators.AddRange(FindObjectsOfType<Generator>());
+    }
     IEnumerator StartDelay()
     {
         yield return new WaitForSeconds(1f);
         StartCoroutine(IncomeLoop());
     }
-    //infinite loop for permenant money generation
+    public void RegisterGenerator(Generator generator)
+    {
+        if (!generators.Contains(generator))
+            generators.Add(generator);
+    }
+
     IEnumerator IncomeLoop()
     {
         while (true)
         {
-            float income = drummerIncome;
-
-            ResourceManager.Instance.AddResource(ResourceType.Money, income);
-
+            ResourceManager.Instance.AddResource(ResourceType.Money, drummerIncome);
             ResourceManager.Instance.AddResource(ResourceType.Followers, followerIncrease);
 
-            //Debug.Log("Followers gained: " + followerIncrease);
             foreach (var generator in generators)
             {
                 generator.Produce();
@@ -38,4 +49,4 @@ public class PassiveIncomeManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
-}
+} 
