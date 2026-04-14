@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Build;
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public enum UpgradeState
 {
@@ -20,6 +21,7 @@ public class UpgradeManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        LoadUpgradesFromFile();
     }
 
     public Upgrade GetUpgrade(int index)
@@ -61,7 +63,7 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < upgrades.Count; i++)
         {
             if (upgrades[i].currentState == UpgradeState.Purchased)
-                return;
+                continue;
 
 
             Upgrade upgrade = upgrades[i];
@@ -77,7 +79,7 @@ public class UpgradeManager : MonoBehaviour
 
         }
     }
-    void ApplyUpgrade(Upgrade upgrade)
+    public void ApplyUpgrade(Upgrade upgrade)
     {
         PassiveIncomeManager income = FindObjectOfType<PassiveIncomeManager>();
         upgrade.cost *= upgrade.costIncrease;
@@ -96,7 +98,32 @@ public class UpgradeManager : MonoBehaviour
             
         }
     }
+    void LoadUpgradesFromFile()
+    {
+        string path = Path.Combine(Application.streamingAssetsPath, "upgrades.json");
+
+        if (!File.Exists(path))
+        {
+            Debug.LogError("Upgrades JSON not found!");
+            return;
+        }
+
+        string json = File.ReadAllText(path);
+
+        UpgradeDatabase db = JsonUtility.FromJson<UpgradeDatabase>(json);
+
+        upgrades.Clear();
+
+        foreach (var data in db.upgrades)
+        {
+            upgrades.Add(UpgradeFactory.Create(data));
+        }
+
+        Debug.Log("Loaded upgrades: " + upgrades.Count);
+    }
 }
+
+
 
 [System.Serializable]
 public class Upgrade
@@ -108,6 +135,11 @@ public class Upgrade
     public int tier;
     public UpgradeState currentState;
     public TextMeshProUGUI text;
+
+    public void SetText(TextMeshProUGUI textMesh)
+    {
+        text = textMesh;
+    }
 }
 
 [System.Serializable]

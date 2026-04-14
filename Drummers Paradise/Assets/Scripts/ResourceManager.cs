@@ -56,6 +56,22 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+    public void SetResource(ResourceType resourceType, float amount)
+    {
+        string type = resourceType.ToString();
+
+        if (resources.ContainsKey(type))
+        {
+            resources[type] = amount;
+
+            OnResourceChanged?.Invoke();
+        }
+        else
+        {
+            Debug.LogWarning("Resource Type Not found " + type);
+        }
+    }
+
     public float GetResource(ResourceType type)
     {
         string key = type.ToString();

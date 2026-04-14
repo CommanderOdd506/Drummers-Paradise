@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 170962491}
   - component: {fileID: 170962495}
   - component: {fileID: 170962496}
+  - component: {fileID: 170962497}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -564,6 +565,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceText: {fileID: 1688633775}
   resourceType: 1
+--- !u!114 &170962497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170962490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c747cbba35384e94c841393bb1c49e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeTexts:
+  - {fileID: 1392034984}
+  - {fileID: 928701738}
 --- !u!1 &332326221
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,25 +1157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278556a03ec723c40831cb4fcbabc59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrades:
-  - name: 'Upgrade Cymbals '
-    upgradeMultiplier:
-      multiplier: 3
-      type: 0
-    cost: 10
-    costIncrease: 10
-    tier: 0
-    currentState: 0
-    text: {fileID: 1392034984}
-  - name: Buy Donner Kit
-    upgradeMultiplier:
-      multiplier: 3
-      type: 1
-    cost: 20
-    costIncrease: 10
-    tier: 0
-    currentState: 0
-    text: {fileID: 928701738}
+  upgrades: []
 --- !u!1 &674911496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,6 +1542,50 @@ RectTransform:
   m_AnchoredPosition: {x: -282, y: 192}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &900674619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900674621}
+  - component: {fileID: 900674620}
+  m_Layer: 0
+  m_Name: SaveSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &900674620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900674619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5dcfa4be84dea4d898e7fac8a55d14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &900674621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900674619}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1373.9446, y: -155.21997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1843935357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &922098527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,6 +2319,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1225587627}
   m_CullTransparentMesh: 1
+--- !u!1 &1277000429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1277000430}
+  - component: {fileID: 1277000431}
+  m_Layer: 0
+  m_Name: PlaytimeLogger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1277000430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277000429}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1373.9446, y: -155.21997, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1843935357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1277000431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277000429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4881575533ce43489d617896af2c8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1392034982
 GameObject:
   m_ObjectHideFlags: 0
@@ -3144,6 +3230,8 @@ Transform:
   - {fileID: 332326222}
   - {fileID: 657982141}
   - {fileID: 2103308760}
+  - {fileID: 900674621}
+  - {fileID: 1277000430}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1884669483
