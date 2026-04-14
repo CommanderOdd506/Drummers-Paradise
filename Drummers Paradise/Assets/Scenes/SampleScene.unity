@@ -457,10 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5950ec1492301ba4983d6f2cb21619eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionCount: 0
-  productionIncrease: 0
-  cost: 0
-  currentState: 0
+  moneyPerSecond: 100
 --- !u!4 &199922892
 Transform:
   m_ObjectHideFlags: 0
@@ -1053,7 +1050,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278556a03ec723c40831cb4fcbabc59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrades: []
+  upgrades:
+  - name: 'Upgrade Cymbals '
+    upgradeMultiplier:
+      multiplier: 3
+      type: 0
+    cost: 10
+    costIncrease: 0
+    tier: 0
+    currentState: 0
+  - name: Buy Donner Kit
+    upgradeMultiplier:
+      multiplier: 3
+      type: 1
+    cost: 20
+    costIncrease: 0
+    tier: 0
+    currentState: 0
 --- !u!1 &674911496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2370,6 +2383,7 @@ GameObject:
   - component: {fileID: 1752937295}
   - component: {fileID: 1752937294}
   - component: {fileID: 1752937297}
+  - component: {fileID: 1752937298}
   m_Layer: 5
   m_Name: Drum (1)
   m_TagString: Untagged
@@ -2441,8 +2455,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1752937297}
-        m_TargetAssemblyTypeName: UpgradeButton, Assembly-CSharp
+      - m_Target: {fileID: 1752937298}
+        m_TargetAssemblyTypeName: PurchaseButton, Assembly-CSharp
         m_MethodName: Purchase
         m_Mode: 1
         m_Arguments:
@@ -2504,6 +2518,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeIndex: 0
+  errorText: {fileID: 0}
+--- !u!114 &1752937298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752937291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86d7de767258dbd43bce1ff2fe607198, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  purchasableObject: {fileID: 1752937297}
   errorText: {fileID: 0}
 --- !u!1 &1788629708
 GameObject:
@@ -3055,7 +3083,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1985995817}
         m_TargetAssemblyTypeName: ClickAction, Assembly-CSharp
-        m_MethodName: OnClickMoney
+        m_MethodName: OnClickDrum
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

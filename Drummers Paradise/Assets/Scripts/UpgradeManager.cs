@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build;
 using UnityEngine;
-using System.IO;
 
 public enum UpgradeState
 {
@@ -20,7 +19,6 @@ public class UpgradeManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        LoadUpgradesFromFile();
     }
 
     public Upgrade GetUpgrade(int index)
@@ -95,30 +93,6 @@ public class UpgradeManager : MonoBehaviour
             }
             
         }
-    }
-
-    void LoadUpgradesFromFile()
-    {
-        string path = Path.Combine(Application.streamingAssetsPath, "upgrades.json");
-
-        if (!File.Exists(path))
-        {
-            Debug.LogError("Upgrades JSON not found!");
-            return;
-        }
-
-        string json = File.ReadAllText(path);
-
-        UpgradeDatabase db = JsonUtility.FromJson<UpgradeDatabase>(json);
-
-        upgrades.Clear();
-
-        foreach (var data in db.upgrades)
-        {
-            upgrades.Add(UpgradeFactory.Create(data));
-        }
-
-        Debug.Log("Loaded upgrades: " + upgrades.Count);
     }
 }
 

@@ -36,9 +36,13 @@ public class UpgradeButton : MonoBehaviour
 
     public void Purchase()
     {
-        if (!UpgradeManager.Instance.BuyUpgrade(upgradeIndex, out string error))
+        if (!upgrade.CanPurchase(out string error))
         {
-            Debug.Log(error);
+            //errorText.text = error;
+            return;
         }
+
+        upgrade.OnPurchase();
+        //errorText.text = "";
     }
 }
