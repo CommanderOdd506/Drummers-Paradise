@@ -15,6 +15,8 @@ public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance;
 
+    public static System.Action<Upgrade> OnUpgradePurchased;                //delegate event 
+
     public List<Upgrade> upgrades = new List<Upgrade>();
 
     private float currentMoney;
@@ -34,6 +36,7 @@ public class UpgradeManager : MonoBehaviour
         errorMessage = "";
 
         Upgrade upgrade = upgrades[index];
+        
         float money = ResourceManager.Instance.GetResource(ResourceType.Money);
 
         if(upgrade.currentState == UpgradeState.Purchased)
@@ -54,6 +57,7 @@ public class UpgradeManager : MonoBehaviour
         ResourceManager.Instance.AddResource(ResourceType.Money, -upgrade.cost);
         //upgrade.currentState = UpgradeState.Purchased;
         ApplyUpgrade(upgrade);
+        OnUpgradePurchased?.Invoke(upgrade);                                         //fires the event
         return true;
     }
     private void Update()
