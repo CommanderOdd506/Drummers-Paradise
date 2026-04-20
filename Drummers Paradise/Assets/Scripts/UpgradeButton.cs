@@ -26,6 +26,7 @@ public class UpgradeButton : MonoBehaviour
         }
     }
 
+    /*
     private void OnEnable()
     {
         UpgradeManager.OnUpgradePurchased += RefreshButton;
@@ -35,7 +36,7 @@ public class UpgradeButton : MonoBehaviour
     {
         UpgradeManager.OnUpgradePurchased -= RefreshButton;
     }
-
+    */
     private void Update()
     {
         if (isGeneratorButton)
@@ -119,7 +120,7 @@ public class UpgradeButton : MonoBehaviour
             }
         }
     }
-
+    /*
     void RefreshButton(Upgrade upgraded)            //event listener
     {
         if (!isGeneratorButton && upgrade == upgraded)
@@ -127,4 +128,5 @@ public class UpgradeButton : MonoBehaviour
             button.interactable = false;
         }
     }
+    */
 }
