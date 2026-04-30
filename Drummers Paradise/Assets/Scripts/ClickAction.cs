@@ -40,7 +40,6 @@ public class ClickAction : MonoBehaviour
             return;
         }
 
-        Debug.Log("PLAYING: " + drumSounds[currentSoundIndex].name);
 
         AudioSource.PlayClipAtPoint(drumSounds[currentSoundIndex], Vector3.zero, 1f);
 
