@@ -90,6 +90,8 @@ public class UpgradeButton : MonoBehaviour
 
                     if (errorText != null)
                         errorText.text = "";
+
+                    GetComponent<EnableOnPurchase>()?.Activate();
                 }
             }
             else
@@ -107,6 +109,8 @@ public class UpgradeButton : MonoBehaviour
 
                     if (errorText != null)
                         errorText.text = "";
+
+                    GetComponent<EnableOnPurchase>()?.Activate();
                 }
             }
         }
