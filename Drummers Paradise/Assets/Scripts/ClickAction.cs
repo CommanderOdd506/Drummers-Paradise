@@ -13,6 +13,10 @@ public class ClickAction : MonoBehaviour
     public List<AudioClip> drumSounds;
     private int currentSoundIndex = 0;
 
+    public float beatResetTime;
+
+    private float clickTimer;
+
 
     public void OnClickHandler()
     {
@@ -23,7 +27,7 @@ public class ClickAction : MonoBehaviour
     {
 
         ResourceManager.Instance.AddResource(ResourceType.Money, clickValue);
-
+        clickTimer = 0;
         PlayNextSound();
     }
 
@@ -41,8 +45,17 @@ public class ClickAction : MonoBehaviour
         }
 
 
-        AudioSource.PlayClipAtPoint(drumSounds[currentSoundIndex], Vector3.zero, 1f);
+        audioSource.PlayOneShot(drumSounds[currentSoundIndex], 1f);
 
         currentSoundIndex = (currentSoundIndex + 1) % drumSounds.Count;
+    }
+
+    void Update()
+    {
+        clickTimer += Time.deltaTime;
+        if(clickTimer > beatResetTime)
+        {
+            currentSoundIndex = 0;
+        }
     }
 }

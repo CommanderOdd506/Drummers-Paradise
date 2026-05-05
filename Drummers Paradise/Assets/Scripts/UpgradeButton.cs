@@ -9,6 +9,7 @@ public class UpgradeButton : MonoBehaviour
     private Generator generator;
     private Button button;
     public bool isGeneratorButton;
+    public SpriteMusicUpgrade drumUpgradeManager;
 
     public Text errorText;
 
@@ -106,6 +107,11 @@ public class UpgradeButton : MonoBehaviour
                 else
                 {
                     Debug.Log("Purchase Successful!");
+
+                    if(upgradeIndex == 1)
+                    {
+                        drumUpgradeManager.UpgradeKit();
+                    }
 
                     if (errorText != null)
                         errorText.text = "";

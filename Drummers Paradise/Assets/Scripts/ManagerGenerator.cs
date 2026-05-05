@@ -6,6 +6,6 @@ public class ManagerGenerator : Generator
 {
     public override void Produce()
     {
-        ResourceManager.Instance.AddResource(ResourceType.Money, productionCount);
+        ResourceManager.Instance.AddResource(resourceType, productionCount);
     }
 }

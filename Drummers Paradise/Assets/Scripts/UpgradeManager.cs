@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
+//using UnityEditor.Build;
 using UnityEngine;
 using TMPro;
 using System.IO;
@@ -18,6 +18,8 @@ public class UpgradeManager : MonoBehaviour
     public static System.Action<Upgrade> OnUpgradePurchased;                //delegate event 
 
     public List<Upgrade> upgrades = new List<Upgrade>();
+
+    public ClickAction drumButton;
 
     private float currentMoney;
     void Awake()
@@ -92,12 +94,13 @@ public class UpgradeManager : MonoBehaviour
         {
             if (upgrade.upgradeMultiplier.type == ResourceType.Money)
             {
-                income.drummerIncome += upgrade.upgradeMultiplier.multiplier;
-
+                income.drummerIncome *= upgrade.upgradeMultiplier.multiplier;
+                drumButton.clickValue += upgrade.upgradeMultiplier.multiplier;
             }
             else if(upgrade.upgradeMultiplier.type == ResourceType.Followers)
             {
                 income.followerIncrease += upgrade.upgradeMultiplier.multiplier;
+                drumButton.clickValue += upgrade.upgradeMultiplier.multiplier;
             }
             
         }

@@ -8,6 +8,7 @@
         [SerializeField] public float productionCount;
         [SerializeField] public float productionIncrease;
         [SerializeField] public float cost;
+        [SerializeField] public ResourceType resourceType;
 
         public UpgradeState currentState;
 

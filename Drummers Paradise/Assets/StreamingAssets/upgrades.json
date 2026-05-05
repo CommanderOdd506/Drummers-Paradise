@@ -2,16 +2,16 @@
   "upgrades": [
     {
       "name": "Upgrade Cymbals",
-      "cost": 10,
-      "costIncrease": 10,
+      "cost": 20,
+      "costIncrease": 5,
       "tier": 0,
       "multiplier": 3,
       "resourceType": "Money"
     },
     {
       "name": "Buy Kit",
-      "cost": 20,
-      "costIncrease": 10,
+      "cost": 40,
+      "costIncrease": 6,
       "tier": 0,
       "multiplier": 3,
       "resourceType": "Followers"

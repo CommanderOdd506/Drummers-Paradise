@@ -47,15 +47,6 @@ public class SpriteMusicUpgrade : MonoBehaviour
         if (currentLevel >= upgrades.Length - 1)
             return;
 
-        int cost = upgrades[currentLevel + 1].price;
-
-        float currentMoney = ResourceManager.Instance.GetResource(ResourceType.Money);
-
-        if (currentMoney < cost)
-            return;
-
-        ResourceManager.Instance.AddResource(ResourceType.Money, -cost);
-
         currentLevel++;
 
         ApplyUpgrade();
@@ -72,12 +63,6 @@ public class SpriteMusicUpgrade : MonoBehaviour
         {
             musicSource.clip = upgrade.music;
             musicSource.Play();
-        }
-
-        if (currentLevel < upgrades.Length - 1)
-        {
-            int nextPrice = upgrades[currentLevel + 1].price;
-            priceText.text = $"UPGRADE KIT\n{nextPrice}";
         }
 
     }
@@ -100,8 +85,12 @@ public class SpriteMusicUpgrade : MonoBehaviour
 
         float currentMoney = ResourceManager.Instance.GetResource(ResourceType.Money);
         int nextCost = upgrades[currentLevel + 1].price;
-
-        bool canAfford = currentMoney >= nextCost;
+        bool canAfford = false;
+        Upgrade upgrade = UpgradeManager.Instance.GetUpgrade(1);
+        if(upgrade.currentState == UpgradeState.Available)
+        {
+            canAfford = true;
+        }
 
         upgradeButton.interactable = canAfford;
 
